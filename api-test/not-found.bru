@@ -1,0 +1,19 @@
+meta {
+  name: Routing — unknown endpoint
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://eulerity-hackathon.appspot.com/v1/not-a-route
+  body: none
+  auth: none
+}
+
+tests {
+  test("returns NOT_FOUND for an unsupported path", function () {
+    expect(res.getStatus()).to.equal(404);
+    expect(res.getBody().error).to.equal("NOT_FOUND");
+    expect(res.getBody()).to.have.property("message");
+  });
+}

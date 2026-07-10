@@ -1,0 +1,19 @@
+meta {
+  name: Routing — non-GET request
+  type: http
+  seq: 12
+}
+
+post {
+  url: https://eulerity-hackathon.appspot.com/v1/metrics-summary
+  body: none
+  auth: none
+}
+
+tests {
+  test("returns METHOD_NOT_ALLOWED for POST", function () {
+    expect(res.getStatus()).to.equal(405);
+    expect(res.getBody().error).to.equal("METHOD_NOT_ALLOWED");
+    expect(res.getBody()).to.have.property("message");
+  });
+}

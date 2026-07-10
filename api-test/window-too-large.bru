@@ -1,0 +1,19 @@
+meta {
+  name: Validation — too-large window
+  type: http
+  seq: 10
+}
+
+get {
+  url: https://eulerity-hackathon.appspot.com/v1/metrics-insights?network=google&startDate=2026-06-10&endDate=2026-07-10
+  body: none
+  auth: none
+}
+
+tests {
+  test("returns WINDOW_TOO_LARGE for a window longer than 30 days", function () {
+    expect(res.getStatus()).to.equal(400);
+    expect(res.getBody().error).to.equal("WINDOW_TOO_LARGE");
+    expect(res.getBody()).to.have.property("message");
+  });
+}

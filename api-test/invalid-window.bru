@@ -1,0 +1,19 @@
+meta {
+  name: Validation — too-small window
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://eulerity-hackathon.appspot.com/v1/metrics-insights?network=google&startDate=2026-07-04&endDate=2026-07-10
+  body: none
+  auth: none
+}
+
+tests {
+  test("rejects date windows shorter than seven days", function () {
+    expect(res.getStatus()).to.equal(400);
+    expect(res.getBody().error).to.equal("WINDOW_TOO_SMALL");
+    expect(res.getBody()).to.have.property("message");
+  });
+}

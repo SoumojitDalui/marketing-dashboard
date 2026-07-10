@@ -1,0 +1,19 @@
+meta {
+  name: Validation — end date before start date
+  type: http
+  seq: 9
+}
+
+get {
+  url: https://eulerity-hackathon.appspot.com/v1/metrics-insights?network=google&startDate=2026-07-10&endDate=2026-06-27
+  body: none
+  auth: none
+}
+
+tests {
+  test("returns INVALID_DATE_RANGE when dates are reversed", function () {
+    expect(res.getStatus()).to.equal(400);
+    expect(res.getBody().error).to.equal("INVALID_DATE_RANGE");
+    expect(res.getBody()).to.have.property("message");
+  });
+}
